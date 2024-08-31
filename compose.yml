@@ -1,0 +1,25 @@
+# https://www.docker.com/blog/how-to-use-the-postgres-docker-official-image/
+
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=${PSQL_PASSWORD}
+      - PGUSER=${PSQL_USER}
+      - POSTGRES_DB=${PSQL_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+
+  mageai:
+    image: mageai/mageai
+    container_name: mageai
+    ports:
+      - 6789:6789
+ 
+volumes:
+  pgdata:

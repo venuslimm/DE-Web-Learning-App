@@ -8,11 +8,11 @@ A gamified web learning platform for users to master data engineering, with a fo
 
 2. web
 
-    Frontend running on NextJS
+    Frontend running on NextJS, using MUI frontend library
 
 3. compose.yml
   
-    Running PostgreSQL
+    Running PostgreSQL, Mage.ai
 
 ## How to start up
 Prerequisites:
@@ -23,17 +23,30 @@ Make a copy of `.env` file from `template.env`:
 cp template.env .env
 ```
 
-To start database:
+To start containers:
 ```
 docker compose up
 ```
 
-To enter database and see its contents (where postgres is the name of the database):
+In the future, to reinit database (clears db, reruns `init-script/init.sql`):
+```
+docker-compose down --volumes
+cd api
+// if you update schema.prisma
+npx prisma db pull
+npx prisma generate
+OR
+// if you update db
+npx prisma migrate dev --name init
+npx prisma generate
+```
+
+To enter psql and see its contents (where postgres is the name of the psql container):
 ```
 docker exec -it postgres psql
 ```
 
-In the future, to reinit database:
+In psql, connect to database (e.g. db) in psql:
 ```
-docker-compose down --volumes
+\c db
 ```

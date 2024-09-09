@@ -26,6 +26,15 @@
     rgb(var(--background-start-rgb));
 } */
 
+h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-weight: bold;
+}
+
 body {
   padding: 1.5rem;
 }

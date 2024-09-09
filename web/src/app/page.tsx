@@ -1,14 +1,34 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from "react";
+import Link from 'next/link';
+import { getCourses } from "../api/CourseApi";
+import { Course } from "../types";
 
 export default function Home() {
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const courses = await getCourses();
+      setCourses(courses);
+    }
+
+    fetchCourses();
+  }, []);
+
   return (
-    // <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    //   <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-    //     <a href="/tableau">Tableau</a>
-    //   </div>
-    // </main>
     <main>
       <h1 className="text-danger">Hello Bootstrap</h1>
+      <ul>
+        {courses.map((course) => (
+          <li key={course.id}>
+            <Link href={`/course/${course.id}`}>
+              {course.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }

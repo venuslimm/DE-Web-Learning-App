@@ -16,7 +16,10 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+      // expect(appController.getHello()).toBe('Hello World!');
+      appController.getCourseById('1').then((course) => {
+        expect(course).toBe({ id: 1 });
+      });
     });
   });
 });

@@ -1,13 +1,26 @@
 import React from 'react'
 
+// TODO: extract out
 interface GuideBoxProps {
-  text: string;
+  url: string;
 }
 
-const GuideBox: React.FC<GuideBoxProps> = ({ text }) => {
+// Alternative: react-pdf-viewer (paid)
+// Free but no highlighting: @simplepdf/react-embed-pdf
+
+// TODO: change src
+
+const GuideBox: React.FC<GuideBoxProps> = ({ url }) => {
   return (
-    <div className='h-64 overflow-y-auto'>
-      {text}
+    <div className='h-full'>
+      <iframe
+        src={url}
+        style={{
+          height: "100%",
+          width: "100%",
+          border: "none"
+        }}
+      />
     </div>
   )
 }

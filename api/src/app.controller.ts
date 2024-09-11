@@ -1,10 +1,21 @@
-import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  NotFoundException,
+  Post,
+  Body,
+} from '@nestjs/common';
 import { CourseService } from './course.service';
 import { course } from '@prisma/client';
+import { ChatbotService } from './chatbot.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly courseService: CourseService) {}
+  constructor(
+    private readonly courseService: CourseService,
+    private readonly chatbotService: ChatbotService,
+  ) {}
 
   @Get('course/:id')
   async getCourseById(@Param('id') id: string): Promise<course> {
@@ -36,8 +47,16 @@ export class AppController {
     const status = await this.courseService.verifyGuideCompletion(Number(id));
     if (!status) {
       // TODO: rename message
-      throw new NotFoundException(`Unable to verify completion for course with id ${id} not found`);
+      throw new NotFoundException(
+        `Unable to verify completion for course with id ${id} not found`,
+      );
     }
     return status;
+  }
+
+  @Post('chatbot')
+  async askChatbot(@Body('prompt') prompt: string) {
+    const response = await this.chatbotService.generateChatbotResponse(prompt);
+    return { response };
   }
 }

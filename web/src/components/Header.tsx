@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const Header = () => {
   return (
-      <header className="d-flex justify-content-between align-items-center my-4 border-b">
+      <header className="d-flex justify-content-between align-items-center my-2 border-b">
         <Link href="/">
           <h1 className="display-10">To insert app logo here</h1>
         </Link>

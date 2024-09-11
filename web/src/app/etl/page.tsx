@@ -5,6 +5,7 @@ import GuideNavDropdown from '@/components/GuideNavDropdown';
 import NextButton from '@/components/NextButton';
 
 import { verifyGuideCompletion } from '@/api/CourseApi';
+import Chatbot from '@/components/Chatbot';
 
 // TODO: Change page name and link
 const ETLPage = () => {
@@ -32,6 +33,7 @@ const ETLPage = () => {
 
   return (
     <div>
+      <NextButton onClickFn={nextButtonClicked} />
       <div className='flex flex-row h-[550px]'>
         <div className='w-2/3 h-full'>
           <iframe
@@ -51,7 +53,7 @@ const ETLPage = () => {
           </div>
         </div>
       </div>
-      <NextButton onClickFn={nextButtonClicked} />
+      <Chatbot />
     </div>
   );
 };

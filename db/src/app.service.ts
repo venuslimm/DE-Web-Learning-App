@@ -4,7 +4,7 @@ import { course } from '@prisma/client';
 
 // Interacts with db
 @Injectable()
-export class CourseService {
+export class AppService {
   constructor(private prisma: PrismaService) {}
 
   async course(id: number): Promise<course | null> {

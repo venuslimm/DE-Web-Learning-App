@@ -10,7 +10,7 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
-  await app.listen(env.apiPort);
-  console.log(`Server is running on port ${env.apiPort}`);
+  await app.listen(env.thisPort);
+  console.log(`Server is running on port ${env.thisPort}`);
 }
 bootstrap();

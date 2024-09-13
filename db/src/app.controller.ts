@@ -1,25 +1,14 @@
-import {
-  Controller,
-  Get,
-  Param,
-  NotFoundException,
-  Post,
-  Body,
-} from '@nestjs/common';
-import { CourseService } from './course.service';
+import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
 import { course } from '@prisma/client';
-import { ChatbotService } from './chatbot.service';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly courseService: CourseService,
-    private readonly chatbotService: ChatbotService,
-  ) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get('course/:id')
   async getCourseById(@Param('id') id: string): Promise<course> {
-    const course = await this.courseService.course(Number(id));
+    const course = await this.appService.course(Number(id));
     if (!course) {
       throw new NotFoundException(`Course with id ${id} not found`);
     }
@@ -28,7 +17,7 @@ export class AppController {
 
   @Get('course')
   async getCourses(): Promise<course[]> {
-    const courses = await this.courseService.courses();
+    const courses = await this.appService.courses();
     if (courses.length === 0) {
       throw new NotFoundException('No courses found');
     }
@@ -44,7 +33,7 @@ export class AppController {
       throw new NotFoundException('Course id is invalid');
     }
 
-    const status = await this.courseService.verifyGuideCompletion(Number(id));
+    const status = await this.appService.verifyGuideCompletion(Number(id));
     if (!status) {
       // TODO: rename message
       throw new NotFoundException(
@@ -52,11 +41,5 @@ export class AppController {
       );
     }
     return status;
-  }
-
-  @Post('chatbot')
-  async askChatbot(@Body('prompt') prompt: string) {
-    const response = await this.chatbotService.generateChatbotResponse(prompt);
-    return { response };
   }
 }

@@ -42,7 +42,6 @@ export const getCourse = async (id: string): Promise<Course | null> => {
 export const verifyGuideCompletion = async (id: string): Promise<boolean | null> => {
   try {
     const response = await axiosCourse.get(`/course/verify/${id}`, getConfig());
-    // TODO: Fix this error
     console.log("Status fetched from API:", response);
     return response.data;
   } catch (error) {

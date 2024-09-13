@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 // TODO: extract out
 interface NextButtonProps {
@@ -8,11 +9,9 @@ interface NextButtonProps {
 
 const NextButton: React.FC<NextButtonProps> = ({ onClickFn }) => {
   return (
-    <div className='mt-1 flex'>
-      <Button variant='contained' className='ml-auto' onClick={onClickFn()}>
-        Next
-      </Button>
-    </div>
+    <Button variant='outlined' className='ml-auto' onClick={onClickFn}>
+      <ArrowForwardIcon />
+    </Button>
   )
 }
 

@@ -1,13 +1,16 @@
 {
-  "name": "ide",
+  "name": "app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm:dev:api\" \"npm:dev:web\"",
-    "dev:api": "cd api && npm run start",
-    "dev:web": "cd web && npm run dev"
+    "dev": "concurrently \"npm:dev:db\" \"npm:dev:web\" \"npm:dev:execution\" \"npm:dev:llm\"",
+    "dev:db": "cd db && npm run start",
+    "dev:web": "cd web && npm run dev",
+    "dev:execution": "cd execution && npm run start",
+    "dev:llm": "cd llm && npm run start"
+
   },
   "author": "",
   "license": "ISC",

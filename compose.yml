@@ -1,4 +1,5 @@
 # https://www.docker.com/blog/how-to-use-the-postgres-docker-official-image/
+version: '3.8'
 
 services:
   db:
@@ -20,6 +21,42 @@ services:
     container_name: mageai
     ports:
       - 6789:6789
+
+  web_fe:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: web_be
+    ports:
+      - "3000:3000"
+    env_file: .env
+
+  db_be:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: db_be
+    ports:
+      - 4000:4000
+    depends_on:
+      - db
+
+  execution_be:
+    build:
+      context: ./execution
+      dockerfile: Dockerfile
+    container_name: execution_be
+    ports:
+      - 5000:5000
+
+  llm_be:
+    build:
+      context: ./llm
+      dockerfile: Dockerfile
+    container_name: llm_be
+    ports:
+      - 6000:6000
+    env_file: .env
  
 volumes:
   pgdata:

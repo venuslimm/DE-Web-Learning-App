@@ -6,11 +6,15 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 // TODO: extract out
+interface NavType {
+  [key: string]: string | number;
+}
+
 interface GuideNavDropdownProps {
   [key: string]: string | number;
 }
 
-const GuideNavDropdown: React.FC<GuideNavDropdownProps> = ({ nav }) => {  
+const GuideNavDropdown = ({ nav }: { nav: NavType }) => {
   const router = useRouter();
   const [selectedNav, setSelectedNav] = React.useState('');
 
@@ -32,7 +36,7 @@ const GuideNavDropdown: React.FC<GuideNavDropdownProps> = ({ nav }) => {
         onChange={handleChange}
       >
         {Object.keys(nav).map((key) => (
-          <MenuItem key={key} value={nav[key]}>{key}</MenuItem>
+          <MenuItem key={key} value={nav[key]}>{key}</MenuItem>        
         ))}
       </Select>
     </FormControl>

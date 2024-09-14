@@ -6,7 +6,7 @@ import PreviousButton from '@/components/PreviousButton';
 
 // TODO fix type
 // TODO fix the way it detects the next and prev page based on its current page using index
-const CourseNav = ({previousButtonClicked = undefined, nextButtonClicked = undefined, navList}: {previousButtonClicked: any, nextButtonClicked: any, navList: any}) => {
+const CourseNav = ({ previousButtonClicked, nextButtonClicked, navList }: { previousButtonClicked?: any, nextButtonClicked?: any, navList: any }) => {
   return (
     <div className='flex justify-center items-center'>
       <div className='flex flex-row mt-2 mb-3 w-50'>

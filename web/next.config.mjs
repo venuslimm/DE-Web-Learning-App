@@ -6,6 +6,7 @@ const nextConfig = {
     }
     return config;
   },
+  output: "standalone", // TODO: this need to add? or can remove?
 };
 
 export default nextConfig;

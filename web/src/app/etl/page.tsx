@@ -1,15 +1,27 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
 import GuideBox from '@/components/GuideBox';
 import CourseNav from '@/components/CourseNav';
 import { verifyGuideCompletion } from '@/api/CourseApi';
 import Chatbot from '@/components/Chatbot';
-import { nav } from '../../constants';
+  import { nav } from '../../constants';
+import { Button, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 // TODO: Change page name and link
 const ETLPage = () => {
   const router = useRouter();
+
+  const guides = [
+    {'name': 'Batch Pipeline', 'url': './resources/tl_guide.pdf'}, 
+    {'name': 'Stream Pipeline', 'url': './resources/streaming_guide.pdf'}
+  ];
+
+  const [selectedGuide, setSelectedGuide] = useState(0);
+  const [selectedGuideUrl, setSelectedGuideUrl] = useState(guides[0]['url']);
+  
+  useEffect(() => {
+  }, [selectedGuideUrl]);
 
   const previousButtonClicked = () => {
     // TODO:  change name
@@ -27,6 +39,11 @@ const ETLPage = () => {
       window.alert('Guide not completed. Please complete the guide before proceeding.');
     }
   };
+  
+  const handleGuideChange = (event: SelectChangeEvent<number>) => {
+    setSelectedGuide(Number(event.target.value));
+    setSelectedGuideUrl(guides[Number(event.target.value)]['url']);
+  }
 
   return (
     <div>
@@ -46,8 +63,29 @@ const ETLPage = () => {
           />
         </div>
         <div className='w-1/3 ml-1 border h-full flex flex-col'>
+          <div className='flex flex-row w-full'>
+            <Select
+              value={selectedGuide}
+              onChange={handleGuideChange}
+              className='flex-grow'
+            >
+              {guides.map((guide, index) => (
+                <MenuItem key={index} value={index}>{guide.name}</MenuItem>
+              ))}
+            </Select>
+            {selectedGuide === 0 && 
+              <a href="./resources/singapore.csv" download>
+                  <Button 
+                    className='h-[100%] ml-2'
+                    variant='contained'
+                  >
+                    Download dataset for this exercise
+                  </Button>
+              </a>
+            }
+          </div>
           <div className='flex-grow border'>
-            <GuideBox url={"./resources/tl_guide.pdf"} />
+            <GuideBox url={selectedGuideUrl} />
           </div>
         </div>
       </div>

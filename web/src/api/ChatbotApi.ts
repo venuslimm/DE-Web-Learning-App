@@ -2,7 +2,7 @@ import axios from "axios";
 
 // TODO: env file
 const axiosChatbot = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: 'http://localhost:7000',
 });
 
 // TODO: move to utils file

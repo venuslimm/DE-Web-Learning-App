@@ -24,7 +24,7 @@ A gamified web learning platform for users to master data engineering, with a fo
 
 ## How to start up
 **Prerequisites:**
-- Docker Daemon (Make sure its running)
+- Docker Desktop (Docker Daemon) (Make sure its running)
 
 **Steps for initial setup:**
 
@@ -35,13 +35,7 @@ For subsequent setup, make sure Docker is running and follow only steps 4 and 5.
     cp template.env .env
     ```
 
-2. Make a copy of `.env` file from `template.env` in the `db` folder:
-    ```
-    cd db
-    cp template.env .env
-    ```
-
-3. Create virtual python environment in `execution` folder:
+2. Create virtual python environment in `execution` folder:
     ```
     cd ../execution
     python3 -m venv myenv
@@ -49,12 +43,12 @@ For subsequent setup, make sure Docker is running and follow only steps 4 and 5.
     myenv\Scripts\activate // for windows
     pip install psycopg2 plotly pandas
     ```
-4. To start containers:
+3. To start containers:
     ```
     docker compose up
     ```
 
-5. To access the app, open Google Chrome browser and enter `http://localhost:3000/`.
+4. To access the app, open Google Chrome browser and enter `http://localhost:3000/`.
 
 ## Management related information
 In the future, to reinit database (clears db, reruns `init-script/init.sql`):

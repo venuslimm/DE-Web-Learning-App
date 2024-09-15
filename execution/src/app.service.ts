@@ -41,13 +41,16 @@ export class AppService {
   async execute(script: string): Promise<any> {
     const timestamp = Date.now();
     const scriptPath = path.join(__dirname, `temp_script_${timestamp}.py`);
-    const envPath = path.join(__dirname, '..', 'myenv');
+
+    const pythonExec =
+      process.platform === 'win32'
+        ? path.join(__dirname, '..', 'myenv', 'Scripts', 'python')
+        : 'python3';
 
     // Write the Python script to a file
     fs.writeFileSync(scriptPath, script);
 
     try {
-      const pythonExec = path.join(envPath, 'Scripts', 'python');
       const result = await this.executeScript(scriptPath, pythonExec);
       console.log(result);
       return result;

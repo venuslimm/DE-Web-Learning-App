@@ -5,12 +5,7 @@ import { env } from '../load-env';
 // TODO: settle env var
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors({
-    // Allow requests from this origin
-    origin: `http://${env.host}:${env.webPort}`,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-  });
+  app.enableCors();
   await app.listen(env.thisPort);
   console.log(`Server is running on port ${env.thisPort}`);
 }

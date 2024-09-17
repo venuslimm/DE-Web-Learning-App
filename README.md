@@ -24,7 +24,7 @@ A gamified web learning platform for users to master data engineering, with a fo
 
 6. compose.yml
   
-    Running PostgreSQL, Mage.ai.
+    Runs all the services mentioned in points 1-5 in their own independent containers. Also runs Zookeeper,  Kafka, Mage.ai, and PostgreSQL.
 
 7. init-scripts
 

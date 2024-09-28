@@ -1,5 +1,6 @@
-# https://www.docker.com/blog/how-to-use-the-postgres-docker-official-image/
-# version: '3.8'
+# For local execution, run only db, mageai, zookeeper, kafka, and streaming-data services
+
+version: '3.8'
 
 services:
   db:
@@ -13,14 +14,15 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./init-scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
-    # ports:
-    #   - 5430:5432
+    # Mapping for local execution 
+    ports:
+      - "${PSQL_LOCAL_PORT}:${PSQL_PORT}"
 
   mageai:
     image: mageai/mageai
     container_name: mageai
     ports:
-      - 6789:6789
+      - "${MAGEAI_PORT}:${MAGEAI_PORT}"
     deploy:
       resources:
         limits:
@@ -32,12 +34,8 @@ services:
       dockerfile: Dockerfile
     container_name: web_fe
     ports:
-      - "3000:3000"
+      - "${WEB_PORT}:${WEB_PORT}"
     env_file: .env
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
 
   db_be:
     build:
@@ -45,7 +43,7 @@ services:
       dockerfile: Dockerfile
     container_name: db_be
     ports:
-      - "4000:4000"
+      - "${DB_PORT}:${DB_PORT}"
     depends_on:
       - db
     env_file: .env
@@ -56,7 +54,7 @@ services:
       dockerfile: Dockerfile
     container_name: execution_be
     ports:
-      - 5000:5000
+      - "${EXECUTION_PORT}:${EXECUTION_PORT}"
     env_file: .env
     deploy:
       resources:
@@ -69,38 +67,42 @@ services:
       dockerfile: Dockerfile
     container_name: llm_be
     ports:
-      - "7000:7000"
+      - "${LLM_PORT}:${LLM_PORT}"
     env_file: .env
 
   zookeeper:
     container_name: zookeeper
     image: wurstmeister/zookeeper:latest
     ports:
-      - "2181:2181"
+      - "${ZOOKEEPER_PORT}:${ZOOKEEPER_PORT}"
 
   kafka:
     container_name: kafka
     image: wurstmeister/kafka:latest
     ports:
-      - "9092:9092"
+      - "${KAFKA_PORT}:${KAFKA_PORT}"
     expose:
-      - "9093"
+      - ${KAFKA_EXPOSED_PORT}
     environment:
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:${KAFKA_EXPOSED_PORT},OUTSIDE://localhost:${KAFKA_PORT}
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
+      KAFKA_LISTENERS: INSIDE://0.0.0.0:${KAFKA_EXPOSED_PORT},OUTSIDE://0.0.0.0:${KAFKA_PORT}
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:${ZOOKEEPER_PORT}
       KAFKA_CREATE_TOPICS: "healthcare-topic"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
     healthcheck:
-      test: ["CMD", "bash", "-c", "echo > /dev/tcp/kafka/9092"]
+      test: ["CMD", "bash", "-c", "echo > /dev/tcp/kafka/${KAFKA_PORT}"]
       interval: 10s
       timeout: 5s
       retries: 10
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
 
   streaming-data:
     build:
@@ -110,6 +112,10 @@ services:
     depends_on:
       kafka:
         condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
  
 volumes:
   pgdata:

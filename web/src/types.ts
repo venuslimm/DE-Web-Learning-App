@@ -6,3 +6,21 @@ export interface Course {
   prerequisite: string;
   conclusion: string;
 }
+
+export interface NavListType {
+  [key: string]: string | number;
+}
+
+export interface ButtonComponentProps {
+  onClickFn: () => void;
+}
+
+export interface UrlProps {
+  url: string;
+}
+
+export interface IdProps {
+  params: {
+    id: string;
+  };
+}

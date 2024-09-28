@@ -22,12 +22,13 @@ function Chatbot() {
   const [input, setInput] = useState('');
   const [open, setOpen] = useState(false);
   const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   // Scroll to the bottom of the messages container
   useEffect(() => {
-    (messagesEndRef.current as HTMLDivElement | null)?.scrollIntoView({
-      behavior: 'smooth',
-    });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const handleCardToggle = () => {
@@ -83,11 +84,11 @@ function Chatbot() {
           </IconButton>
         } />
       <Collapse in={open}>
-        <div className='flex flex-col w-full max-h-[400px] overflow-y-auto'>
+        <div className='flex flex-col w-full max-h-[400px] overflow-y-auto' ref={messagesContainerRef}>
           <div className='w-full'>
             {messages.map((message, index) => (
               <div key={index} className='message'>
-                {/* TODO: Fix or change markdown (doesnt work for tabbed) */}
+                {/* TODO: Fix or change markdown (doesnt work for tabbed contents) */}
                 {message.role === 'bot' ? (
                   <ChatBubble message={message.text} isSender={false} />
                 ) : (
@@ -98,7 +99,6 @@ function Chatbot() {
             <div ref={messagesEndRef} />
           </div>
           <div className='flex flex-row mt-auto sticky bottom-0 bg-white'>
-            {/* TODO: Add char limit fe and be */}
             <TextField
               className='flex-grow'
               id='filled-multiline-flexible'
@@ -109,6 +109,8 @@ function Chatbot() {
               value={input}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
+              required={true}
+              inputProps={{ maxLength: 300 }}
               slotProps={{
                 input: {
                   endAdornment: (

@@ -1,13 +1,9 @@
 import React from 'react'
 import { Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { ButtonComponentProps } from '@/types';
 
-// TODO: extract out
-interface NextButtonProps {
-  onClickFn: () => void;
-}
-
-const NextButton: React.FC<NextButtonProps> = ({ onClickFn }) => {
+const NextButton: React.FC<ButtonComponentProps> = ({ onClickFn }) => {
   return (
     <Button variant='outlined' className='ml-auto' onClick={onClickFn}>
       <ArrowForwardIcon />

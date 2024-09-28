@@ -1,16 +1,10 @@
 import React from 'react'
+import { UrlProps } from '@/types';
 
-// TODO: extract out
-interface GuideBoxProps {
-  url: string;
-}
-
-// Alternative: react-pdf-viewer (paid)
+// Alternative for PDF viewer: react-pdf-viewer (paid)
 // Free but no highlighting: @simplepdf/react-embed-pdf
 
-// TODO: change src
-
-const GuideBox: React.FC<GuideBoxProps> = ({ url }) => {
+const Guide: React.FC<UrlProps> = ({ url }) => {
   return (
     <div className='h-full'>
       <iframe
@@ -25,4 +19,4 @@ const GuideBox: React.FC<GuideBoxProps> = ({ url }) => {
   )
 }
 
-export default GuideBox;
+export default Guide;

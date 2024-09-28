@@ -2,16 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { getCourse } from "@/api/CourseApi";
-import { Course } from "../../../types";
+import { Course, IdProps } from "../../../types";
 
-// TODO: extract out
-interface CoursePageProps {
-  params: {
-    id: string;
-  };
-}
-
-const CoursePage = ({ params: { id } }: CoursePageProps) => {
+const CoursePage = ({ params: { id } }: IdProps) => {
   const [course, setCourse] = useState<Course | null>(null);
 
   useEffect(() => {

@@ -1,8 +1,10 @@
-// TODO: Get from db and change the redirect links
+// TODO: Change to get from db
+// All comes with chatbot
 export const nav = {
-  'Overview': '/doc/1',  // maybe pdf doc only
-  'ETL: E': '/data-viz',        // code+pdf doc
-  'ETL: TL': '/etl',    // docker container + pdf doc
-  'Visualisation': '/data-viz',   // code+pdf doc
-  'Summary': '/doc/1',        // maybe pdf doc only 
+  'Introduction': '/intro-to-etl/introduction',   // pdf doc
+  'EDA': '/intro-to-etl/eda',                     // pdf doc
+  'ETL: Overview': '/intro-to-etl/etl-overview',  // pdf doc
+  'ETL: Practical': '/intro-to-etl/etl-practical',   // mageai + pdf doc
+  'Data Visualisation': '/intro-to-etl/data-viz', // code + pdf doc
+  'Summary': '/intro-to-etl/summary',             // pdf doc
 };

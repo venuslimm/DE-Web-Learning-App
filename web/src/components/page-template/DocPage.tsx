@@ -1,15 +1,7 @@
-import GuideBox from '@/components/GuideBox'
+import Guide from '@/components/Guide'
 import NextButton from '@/components/NextButton';
-import React from 'react'
 
-// TODO: extract out
-interface DocPageProps {
-  params: {
-    id: string;
-  };
-}
-
-const DocPage = ({ params: { id } }: DocPageProps) => {
+const DocPage = () => {
   const nextClickFn = () => {
     // TODO: Redirect to next page. Maybe we can store an array of pages in order
     console.log('redirect to next page');
@@ -18,7 +10,7 @@ const DocPage = ({ params: { id } }: DocPageProps) => {
   return (
     <div>
       <div className='h-[580px]'>
-        <GuideBox url={"/resources/tl_guide.pdf"} />
+        <Guide url={"/resources/tl_guide.pdf"} />
       </div>
       <NextButton onClickFn={nextClickFn} />
     </div>

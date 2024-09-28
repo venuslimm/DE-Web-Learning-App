@@ -4,19 +4,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { NavListType } from '../types';
 
-// TODO: extract out
-interface NavType {
-  [key: string]: string | number;
-}
-
-interface GuideNavDropdownProps {
-  [key: string]: string | number;
-}
-
-const GuideNavDropdown = ({ nav }: { nav: NavType }) => {
+const ToggleGuide = ({ nav, currentPageKey }: { nav: NavListType, currentPageKey: string }) => {
   const router = useRouter();
-  const [selectedNav, setSelectedNav] = React.useState('');
+  const [selectedNav, setSelectedNav] = React.useState(nav[currentPageKey] as string);
 
   const handleChange = (event: SelectChangeEvent) => {
     const page = event.target.value;
@@ -43,4 +35,4 @@ const GuideNavDropdown = ({ nav }: { nav: NavType }) => {
   )
 }
 
-export default GuideNavDropdown;
+export default ToggleGuide;

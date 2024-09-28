@@ -32,34 +32,26 @@ A gamified web learning platform for users to master data engineering, with a fo
 
 ## How to start up
 
-A full guide on how to setup and run this app locally can be found in `.\Setup Guide.docx`.
+A full guide on how to setup and run this app locally on Docker can be found in `.\Setup Guide.docx`.
 
 **Prerequisites:**
 - Docker Desktop (Docker Daemon) (Make sure its running)
 
-**Steps for initial setup:**
+**Steps for initial setup to run on Docker:**
 
-For subsequent setup, make sure Docker is running and follow only steps 3 and 4.
+For subsequent setup, make sure Docker is running and follow only steps 2 and 3.
 
 1. Make a copy of `.env` file from `template.env` in the root folder. Replace `OPENAI_API_KEY` with your own API key:
     ```
     cp template.env .env
     ```
 
-2. Create virtual python environment in `execution` folder (skip this since we are running all the services in Docker which has the code to set this step up):
-    ```
-    cd ../execution
-    python3 -m venv myenv
-    source myenv/bin/activate // for unix
-    myenv\Scripts\activate // for windows
-    pip install psycopg2 plotly pandas
-    ```
-3. To start containers:
+2. To start containers:
     ```
     docker compose up
     ```
 
-4. To access the app, open Google Chrome browser and enter `http://localhost:3000/`.
+3. To access the app, open Google Chrome browser and enter `http://localhost:3000/`.
 
 ## Database management related information
 In the future, to reinit database (clears db, reruns `init-script/init.sql`):

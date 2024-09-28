@@ -1,20 +1,5 @@
-
-import axios from "axios";
+import { axiosCourse, getConfig } from './utils';
 import { Course } from '../types';
-
-// TODO: env file
-const axiosCourse = axios.create({
-  baseURL: 'http://localhost:4000',
-});
-
-// TODO: move to utils file
-const getConfig = () => {
-  return {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-};
 
 export const getCourses = async (): Promise<Course[]> => {
   try {

@@ -2,10 +2,15 @@ from kafka import KafkaProducer
 from random import randint
 import json
 import time
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+KAFKA_EXPOSED_PORT = os.getenv('KAFKA_EXPOSED_PORT', 9093)
 
 topic = 'topic'
 producer = KafkaProducer(
-  bootstrap_servers='kafka:9093',
+  bootstrap_servers=f'kafka:{KAFKA_EXPOSED_PORT}',
 )
 
 def publish_message():

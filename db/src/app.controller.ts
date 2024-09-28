@@ -35,7 +35,6 @@ export class AppController {
 
     const status = await this.appService.verifyGuideCompletion(Number(id));
     if (!status) {
-      // TODO: rename message
       throw new NotFoundException(
         `Unable to verify completion for course with id ${id} not found`,
       );

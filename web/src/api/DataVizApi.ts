@@ -1,18 +1,4 @@
-
-import axios from "axios";
-
-// TODO: env file
-const axiosDataViz = axios.create({
-  baseURL: 'http://localhost:5000',
-});
-
-const getConfig = () => {
-  return {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-};
+import { axiosDataViz } from './utils';
 
 export const getExecOutput = async (code: string): Promise<any> => {
   try {

@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: (config, { dev }) => {
@@ -6,7 +10,11 @@ const nextConfig = {
     }
     return config;
   },
-  output: "standalone", // TODO: this need to add? or can remove?
+  output: "standalone",
+  env: {
+    LLM_PORT: process.env.LLM_PORT,
+    MAGEAI_PORT: process.env.MAGEAI_PORT,
+  },
 };
 
 export default nextConfig;

@@ -1,18 +1,4 @@
-import axios from "axios";
-
-// TODO: env file
-const axiosChatbot = axios.create({
-  baseURL: 'http://localhost:7000',
-});
-
-// TODO: move to utils file
-const getConfig = () => {
-  return {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-};
+import { axiosChatbot, getConfig } from './utils';
 
 export const getChatbotResponse = async (prompt: string): Promise<string> => {
   try {

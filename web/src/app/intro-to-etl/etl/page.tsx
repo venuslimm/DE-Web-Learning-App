@@ -7,13 +7,12 @@ import CourseNavBar from '@/components/CourseNavBar';
 import Chatbot from '@/components/Chatbot';
   import { nav } from '../../../constants';
 import { Button, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { introToEtlDocs } from '../../../constants';
 
 const ETLPracticalPage = () => {
-  const router = useRouter();
-
   const guides = [
-    {'name': 'Batch Pipeline', 'url': '/resources/tl_guide.pdf'}, 
-    {'name': 'Stream Pipeline', 'url': '/resources/streaming_guide.pdf'}
+    {'name': 'Batch Pipeline', 'url': introToEtlDocs['Batch Guide'] }, 
+    {'name': 'Stream Pipeline', 'url': introToEtlDocs['Stream Guide'] }
   ];
 
   const [selectedGuide, setSelectedGuide] = useState(0);
@@ -37,7 +36,7 @@ const ETLPracticalPage = () => {
   const handleGuideChange = (event: SelectChangeEvent<number>) => {
     setSelectedGuide(Number(event.target.value));
     setSelectedGuideUrl(guides[Number(event.target.value)]['url']);
-  }
+  };
 
   return (
     <div>
@@ -66,13 +65,13 @@ const ETLPracticalPage = () => {
               ))}
             </Select>
             {selectedGuide === 0 && 
-              <a href="/resources/singapore.csv" download>
-                  <Button 
-                    className='h-[100%] ml-2'
-                    variant='contained'
-                  >
-                    Download dataset for this exercise
-                  </Button>
+              <a href={introToEtlDocs["Batch Dataset"]} download>
+                <Button 
+                  className='h-[100%] ml-2'
+                  variant='contained'
+                >
+                  Download dataset for this exercise
+                </Button>
               </a>
             }
           </div>

@@ -1,9 +1,20 @@
 import React from 'react'
-import DocPage from '@/components/page-template/DocPage'
+import { Button, Link } from '@mui/material';
+import DocPage from '@/components/page-template/DocPage';
+import { introToEtlDocs } from '@/constants';
 
 const SummaryPage = () => {
   return (
-    <DocPage />
+    <div>
+      <DocPage url={introToEtlDocs['Summary']} />
+      <div className="flex justify-end">
+        <Button>
+          <Link href='/'>
+            Exit
+          </Link>
+        </Button>
+      </div>
+    </div>
   )
 }
 

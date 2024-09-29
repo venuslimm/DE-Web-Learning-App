@@ -1,18 +1,19 @@
+'use client';
+
 import Guide from '@/components/Guide'
-import NextButton from '@/components/NextButton';
+import CourseNavBar from '../CourseNavBar';
+import { UrlProps } from '@/types';
+import { nav } from '@/constants';
+import Chatbot from '../Chatbot';
 
-const DocPage = () => {
-  const nextClickFn = () => {
-    // TODO: Redirect to next page. Maybe we can store an array of pages in order
-    console.log('redirect to next page');
-  };
-
+const DocPage: React.FC<UrlProps> = ({ url }) => {
   return (
     <div>
+      <CourseNavBar navList={nav} />
       <div className='h-[580px]'>
-        <Guide url={"/resources/tl_guide.pdf"} />
+        <Guide url={url} />
       </div>
-      <NextButton onClickFn={nextClickFn} />
+      <Chatbot />
     </div>
   )
 }

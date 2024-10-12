@@ -14,12 +14,14 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import ChatBubble from './ChatBubble';
 import { getChatbotResponse } from '../api/ChatbotApi';
+import { ChatbotMessage, ChatbotConvo } from '@/types';
 
 function Chatbot() {
-  const [messages, setMessages] = useState<{ role: string; text: string }[]>(
+  const [messages, setMessages] = useState<ChatbotConvo>(
     []
   );
   const [input, setInput] = useState('');
+  const [isSendable, setIsSendable] = useState(true);
   const [open, setOpen] = useState(false);
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -44,24 +46,24 @@ function Chatbot() {
   const handleSendMessage = async () => {
     if (input.trim() === '') return;
 
-    console.log('Sending message:', input);
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { role: 'user', text: input.trim() },
-    ]);
+    setIsSendable(false);
+    setInput('');
+
+    const newMessage: ChatbotMessage = { role: 'user', content: input.trim() };
+    let updatedMessages = [...messages, newMessage];
+    setMessages(updatedMessages);
 
     try {
-      const botResponse = await getChatbotResponse(input.trim());
-
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { role: 'bot', text: botResponse },
-      ]);
-
-      setInput('');
+      const botResponse = await getChatbotResponse(updatedMessages);
+      updatedMessages[updatedMessages.length - 1].isStatusUp = true;
+      updatedMessages = [...updatedMessages, { role: 'assistant', content: botResponse, isStatusUp: true }];
     } catch (error) {
       console.error('Error sending message:', error);
+      updatedMessages[updatedMessages.length - 1].isStatusUp = false;
+      updatedMessages = [...updatedMessages, { role: 'assistant', content: 'Error, unable to get a response.', isStatusUp: false }];
     }
+    setIsSendable(true);
+    setMessages(updatedMessages);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -89,10 +91,10 @@ function Chatbot() {
             {messages.map((message, index) => (
               <div key={index} className='message'>
                 {/* TODO: Fix or change markdown (doesnt work for tabbed contents) */}
-                {message.role === 'bot' ? (
-                  <ChatBubble message={message.text} isSender={false} />
+                {message.role === 'assistant' ? (
+                  <ChatBubble message={message.content} isSender={false} />
                 ) : (
-                  <ChatBubble message={message.text} isSender={true} />
+                  <ChatBubble message={message.content} isSender={true} />
                 )}
               </div>
             ))}
@@ -115,7 +117,7 @@ function Chatbot() {
                 input: {
                   endAdornment: (
                     <InputAdornment position='end'>
-                      <IconButton onClick={handleSendMessage}>
+                      <IconButton onClick={handleSendMessage} disabled={!isSendable}>
                         <SendIcon />
                       </IconButton>
                     </InputAdornment>

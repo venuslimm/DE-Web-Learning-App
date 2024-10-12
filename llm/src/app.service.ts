@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
+import { ChatbotConvo } from './app.types';
 
 // Interacts with openai
 @Injectable()
@@ -12,29 +13,38 @@ export class AppService {
     });
   }
 
-  async generateChatbotResponse(prompt: string): Promise<string> {
+  async generateChatbotResponse(convo: ChatbotConvo): Promise<string> {
     try {
-      // const response = await this.openai.chat.completions.create({
-      //   model: 'gpt-4o-mini',
-      //   messages: [
-      //     {
-      //       role: 'system',
-      //       content:
-      //         'You are an expert in data domains, specifically data engineering.',
-      //     },
-      //     { role: 'user', content: prompt },
-      //   ],
-      //   // max_tokens: 100, // TODO: Change # of max tokens in response
-      //   temperature: 0.5, // Control the randomness to avoid verbose answers
-      //   top_p: 0.8, // Limits the diversity of the response
-      // });
+      convo[convo.length - 1].content =
+        `Generate in maximum 5 sentences including pointers. ${convo[convo.length - 1].content}`;
 
-      // if (!response.choices[0].message.content) {
-      //   throw new Error('Could not generate a response');
-      // }
+      console.log(
+        'Chatbot request sent to OpenAI without the system content:',
+        convo,
+      );
 
-      // return response.choices[0].message.content;
-      return prompt;
+      const response = await this.openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          {
+            role: 'system',
+            content:
+              'You are an expert in data domains, specifically data engineering.',
+          },
+          ...convo,
+        ],
+        // Refer to https://www.promptingguide.ai/
+        max_tokens: 600,
+        top_p: 0.2, // Higher = More diverse output, Lower = More confident output
+        frequency_penalty: 0.6, // Higher = Less repetitive output
+      });
+
+      if (!response.choices[0].message.content) {
+        throw new Error('Could not generate a response');
+      }
+
+      return response.choices[0].message.content;
+      // return prompt;
     } catch (error) {
       console.error('Error with OpenAI API:', error);
       throw new Error('Could not generate a response');

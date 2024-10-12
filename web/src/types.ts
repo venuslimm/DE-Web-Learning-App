@@ -11,6 +11,13 @@ export interface NavListType {
   [key: string]: string | number;
 };
 
+export interface ChatbotMessage {
+  role: 'user' | 'assistant';
+  content: string;
+  isStatusUp?: boolean;
+}
+export type ChatbotConvo = ChatbotMessage[];
+
 export interface ButtonComponentProps {
   onClickFn: () => void;
 };

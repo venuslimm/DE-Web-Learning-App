@@ -18,6 +18,7 @@ interface CodeDocPageProps {
 
 const CodeDocPage: React.FC<CodeDocPageProps> = ({ html, setHtml, code, setCode, url }) => {
   const [content, setContent] = useState(html);
+  const [isExecutable, setIsExecutable] = useState(true);
   
   useEffect(() => {
     // Update the content state when the html prop changes
@@ -26,6 +27,7 @@ const CodeDocPage: React.FC<CodeDocPageProps> = ({ html, setHtml, code, setCode,
 
   const execCode = async () => {
     console.log(code);
+    setIsExecutable(false);
     const output = await getExecOutput(code);
     console.log(output)
     if (output.length === 0) {
@@ -33,6 +35,7 @@ const CodeDocPage: React.FC<CodeDocPageProps> = ({ html, setHtml, code, setCode,
     } else {
       setHtml(output);
     }
+    setIsExecutable(true);
   };
 
   return (
@@ -43,7 +46,7 @@ const CodeDocPage: React.FC<CodeDocPageProps> = ({ html, setHtml, code, setCode,
       <div className='flex flex-row'>
         <div className='flex flex-col w-[50%] mr-1'>
           <div className='flex justify-center bg-[#f5f5f5]'>
-            <Button className='w-[50px] py-0 pr-5 ml-auto' onClick={execCode}>Execute</Button>
+            <Button className='w-[50px] py-0 pr-5 ml-auto' onClick={execCode} disabled={!isExecutable}>Execute</Button>
           </div>
           <CodeMirror
             value={code}

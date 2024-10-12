@@ -36,6 +36,10 @@ services:
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
     env_file: .env
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
 
   db_be:
     build:
@@ -70,52 +74,52 @@ services:
       - "${LLM_PORT}:${LLM_PORT}"
     env_file: .env
 
-  zookeeper:
-    container_name: zookeeper
-    image: wurstmeister/zookeeper:latest
-    ports:
-      - "${ZOOKEEPER_PORT}:${ZOOKEEPER_PORT}"
+  # zookeeper:
+  #   container_name: zookeeper
+  #   image: wurstmeister/zookeeper:latest
+  #   ports:
+  #     - "${ZOOKEEPER_PORT}:${ZOOKEEPER_PORT}"
 
-  kafka:
-    container_name: kafka
-    image: wurstmeister/kafka:latest
-    ports:
-      - "${KAFKA_PORT}:${KAFKA_PORT}"
-    expose:
-      - ${KAFKA_EXPOSED_PORT}
-    environment:
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:${KAFKA_EXPOSED_PORT},OUTSIDE://localhost:${KAFKA_PORT}
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_LISTENERS: INSIDE://0.0.0.0:${KAFKA_EXPOSED_PORT},OUTSIDE://0.0.0.0:${KAFKA_PORT}
-      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:${ZOOKEEPER_PORT}
-      KAFKA_CREATE_TOPICS: "healthcare-topic"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    depends_on:
-      - zookeeper
-    healthcheck:
-      test: ["CMD", "bash", "-c", "echo > /dev/tcp/kafka/${KAFKA_PORT}"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
+  # kafka:
+  #   container_name: kafka
+  #   image: wurstmeister/kafka:latest
+  #   ports:
+  #     - "${KAFKA_PORT}:${KAFKA_PORT}"
+  #   expose:
+  #     - ${KAFKA_EXPOSED_PORT}
+  #   environment:
+  #     KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:${KAFKA_EXPOSED_PORT},OUTSIDE://localhost:${KAFKA_PORT}
+  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+  #     KAFKA_LISTENERS: INSIDE://0.0.0.0:${KAFKA_EXPOSED_PORT},OUTSIDE://0.0.0.0:${KAFKA_PORT}
+  #     KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:${ZOOKEEPER_PORT}
+  #     KAFKA_CREATE_TOPICS: "healthcare-topic"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   depends_on:
+  #     - zookeeper
+  #   healthcheck:
+  #     test: ["CMD", "bash", "-c", "echo > /dev/tcp/kafka/${KAFKA_PORT}"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 10
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.5'
 
-  streaming-data:
-    build:
-      context: ./streaming-data
-      dockerfile: Dockerfile
-    container_name: streaming-data_be
-    depends_on:
-      kafka:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
+  # streaming-data:
+  #   build:
+  #     context: ./streaming-data
+  #     dockerfile: Dockerfile
+  #   container_name: streaming-data_be
+  #   depends_on:
+  #     kafka:
+  #       condition: service_healthy
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.5'
  
 volumes:
   pgdata:

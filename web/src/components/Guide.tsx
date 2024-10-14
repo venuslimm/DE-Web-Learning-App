@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box } from '@mui/material';
 import { UrlProps } from '@/types';
 
 // Alternative for PDF viewer: react-pdf-viewer (paid)
@@ -6,7 +7,7 @@ import { UrlProps } from '@/types';
 
 const Guide: React.FC<UrlProps> = ({ url }) => {
   return (
-    <div className='h-full'>
+    <Box className='h-full'>
       <iframe
         src={url}
         style={{
@@ -15,7 +16,7 @@ const Guide: React.FC<UrlProps> = ({ url }) => {
           border: "none"
         }}
       />
-    </div>
+    </Box>
   )
 }
 

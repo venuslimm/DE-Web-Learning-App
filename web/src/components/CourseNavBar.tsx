@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter, usePathname } from 'next/navigation';
-import ToggleGuide from '@/components/ToggleGuide';
+import { Box } from '@mui/material';
+import ToggleWithinCourse from '@/components/ToggleWithinCourse';
 import NextButton from '@/components/NextButton';
 import PreviousButton from '@/components/PreviousButton';
 
@@ -42,13 +43,13 @@ const CourseNavBar: React.FC<CourseNavBarProps> = ({
   }
   
   return (
-    <div className='flex justify-center items-center'>
-      <div className='flex flex-row mt-2 mb-3 w-50'>
-        {isFirstPage ? <></> : <PreviousButton onClickFn={previousButtonClicked} />}
-        <ToggleGuide nav={navList} currentPageKey={currentPageKey} />
-        {isLastPage ? <></> : <NextButton onClickFn={nextButtonClicked} />}
-      </div>
-    </div>
+    <Box display="flex" justifyContent="center" alignItems="center" pt={2}>
+      <Box display="flex" flexDirection="row" mt={2} mb={3}>
+        {!isFirstPage && <PreviousButton onClickFn={previousButtonClicked} />}
+        <ToggleWithinCourse nav={navList} currentPageKey={currentPageKey} />
+        {!isLastPage && <NextButton onClickFn={nextButtonClicked} />}
+      </Box>
+    </Box>
   )
 }
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getCourse } from "@/api/CourseApi";
 import { Course, IdProps } from "../../../types";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography, Paper, List, ListItem, ListItemText, CircularProgress } from "@mui/material";
 import { nav } from "@/constants";
 import Link from "next/link";
 
@@ -28,63 +28,97 @@ const CoursePage = ({ params: { id } }: IdProps) => {
 
   return (
     !course ? (
-      <div>Loading...</div>
+      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <CircularProgress />
+      </Box>
     ) : (
-      <div className="flex flex-row">
-        <div>
-          <h1 className="my-5">{course.name}</h1>
-          <p className="mb-5">{course.description}</p>
-          <div className="mb-5">
-            <h2 className="mb-1">
-              In this course, you will learn:
-            </h2>
-            {course.learning_objective ? (
-              <ul>
-                {Object.entries(course.learning_objective).map(([title, description], index) => (
-                  <li key={index}>
-                    <strong>{title}:</strong> {description}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No learning objectives available.</p>
-            )}
-          </div>
-          <div className="mb-5">
-            <h2 className="mb-1">
-              Prerequisites
-            </h2>
-            <p>
-              {course.prerequisite 
-                ? `${course.prerequisite}`
-                : 'No prerequisites required for this course.'
-              }
-            </p>
-          </div>
-          <p>{course.conclusion}</p>
-        </div>
-        <div className="mx-5">
-          <Button variant="contained" className="whitespace-nowrap my-5">
-            <Link href={Object.values(nav)[0]}>
-              Start Course Now!
-            </Link>
-          </Button>
-          <Box sx={{ p: 2, border: '1px dashed grey' }}>
-            <h2>Course Details</h2>
-            <p>
-              Duration:
-              {Math.floor(courseDetails.duration / 60) > 0 && (
-                ` ${Math.floor(courseDetails.duration / 60)} ${Math.floor(courseDetails.duration / 60) === 1 ? 'hour' : 'hours'}`
+      <Box display="flex" flexDirection='column' py={'2rem'}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          {course.name} ⚡
+        </Typography>
+
+        <Box display='flex' flexDirection={{ xs: 'column', md: 'row'}}>
+          <Box flex={4} pr={2}>
+            <Typography variant="body1" mb={3}>
+              {course.description}
+            </Typography>
+            
+            <Box mb={3}>
+              <Typography variant="h6" component="h2" gutterBottom>
+                In this course, you will learn 👩🏻‍💻📓✍🏻💡
+              </Typography>
+              {course.learning_objective ? (
+                <List>
+                  {Object.entries(course.learning_objective).map(([title, description], index) => (
+                    <ListItem key={index}>
+                      <ListItemText
+                        primary={title}
+                        secondary={description}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <Typography variant="body1">No learning objectives available.</Typography>
               )}
-              {courseDetails.duration % 60 > 0 && (
-                ` ${courseDetails.duration % 60} ${courseDetails.duration % 60 === 1 ? 'minute' : 'minutes'}`
-              )}
-            </p>
-            <p>Difficulty: {courseDetails.difficulty}</p>
-            <p>Rating: {courseDetails.rating}</p>
+            </Box>
+            
+            <Box mb={3}>
+              <Typography variant="h6" component="h2" gutterBottom>
+                Prerequisites 📚
+              </Typography>
+              <Typography variant="body1">
+                {course.prerequisite 
+                  ? `${course.prerequisite}`
+                  : 'No prerequisites required for this course.'
+                }
+              </Typography>
+            </Box>
+
+            <Typography variant="body1" mb={3}>{course.conclusion}</Typography>
           </Box>
-        </div>
-      </div>
+
+          <Box flex={1} width={'100%'}>
+            <Link href={Object.values(nav)[0]} passHref>
+              <Button variant="contained" color="primary" fullWidth sx={{ mb: 3 }}>
+                <Typography variant="button" color="inherit">
+                  Start Now 🚀
+                </Typography>
+              </Button>
+            </Link>
+
+            <Paper variant="outlined" sx={{ p: 2 }}>
+              <ListItem>
+                <ListItemText
+                  primary="Duration 🕒"
+                  secondary={
+                    <>
+                      {Math.floor(courseDetails.duration / 60) > 0 && (
+                        ` ${Math.floor(courseDetails.duration / 60)} ${Math.floor(courseDetails.duration / 60) === 1 ? 'hour' : 'hours'}`
+                      )}
+                      {courseDetails.duration % 60 > 0 && (
+                        ` ${courseDetails.duration % 60} ${courseDetails.duration % 60 === 1 ? 'minute' : 'minutes'}`
+                      )}
+                    </>
+                  }
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemText
+                    primary="Difficulty 💪"
+                    secondary={courseDetails.difficulty}
+                  />
+              </ListItem>
+              <ListItem>
+                <ListItemText
+                    primary="Rating ⭐"
+                    secondary={courseDetails.rating}
+                  />
+              </ListItem>
+            </Paper>
+          </Box>
+        </Box>
+      </Box>
     )
   );
 };

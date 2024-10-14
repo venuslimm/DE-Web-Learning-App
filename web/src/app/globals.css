@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-}
+} */
 
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -26,22 +26,6 @@
     rgb(var(--background-start-rgb));
 } */
 
-h1 {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-h2 {
-  font-weight: bold;
-}
-
-h3 {
-  font-weight: bold;
-}
-
-body {
-  padding: 1.5rem;
-}
 
 @layer utilities {
   .text-balance {

@@ -1,5 +1,6 @@
 'use client';
 
+import { Box } from '@mui/material';
 import Guide from '@/components/Guide'
 import CourseNavBar from '../CourseNavBar';
 import { UrlProps } from '@/types';
@@ -8,13 +9,13 @@ import Chatbot from '../Chatbot';
 
 const DocPage: React.FC<UrlProps> = ({ url }) => {
   return (
-    <div>
+    <Box>
       <CourseNavBar navList={nav} />
-      <div className='h-[580px]'>
+      <Box className='h-[580px]'>
         <Guide url={url} />
-      </div>
+      </Box>
       <Chatbot />
-    </div>
+    </Box>
   )
 }
 

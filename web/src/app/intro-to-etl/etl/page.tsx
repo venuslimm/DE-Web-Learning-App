@@ -1,12 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'
 import Guide from '@/components/Guide';
 import CourseNavBar from '@/components/CourseNavBar';
 // import { verifyGuideCompletion } from '@/api/CourseApi';
 import Chatbot from '@/components/Chatbot';
   import { nav } from '../../../constants';
-import { Button, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Box, Button, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { introToEtlDocs } from '../../../constants';
 
 const ETLPracticalPage = () => {
@@ -39,49 +38,47 @@ const ETLPracticalPage = () => {
   };
 
   return (
-    <div>
-      <CourseNavBar
-        navList={nav}
-        />
-      <div className='flex flex-row h-[550px]'>
-        <div className='w-2/3 h-full'>
+    <Box>
+      <CourseNavBar navList={nav} />
+      <Box display="flex" flexDirection="row" height="550px">
+        <Box width="66.67%" height="100%">
           <iframe
             src={`http://localhost:${process.env.MAGEAI_PORT || 6789}`}
-            title='ETL'
-            width='100%'
-            height='550px'
+            title="ETL"
+            width="100%"
+            height="550px"
             style={{ border: 'none' }}
           />
-        </div>
-        <div className='w-1/3 ml-1 border h-full flex flex-col'>
-          <div className='flex flex-row w-full'>
+        </Box>
+        <Box width="33.33%" ml={1} height="100%" display="flex" flexDirection="column">
+          <Box display="flex" flexDirection="row" width="100%" mb={1}>
             <Select
               value={selectedGuide}
               onChange={handleGuideChange}
-              className='flex-grow'
+              fullWidth
             >
               {guides.map((guide, index) => (
                 <MenuItem key={index} value={index}>{guide.name}</MenuItem>
               ))}
             </Select>
-            {selectedGuide === 0 && 
+            {selectedGuide === 0 && (
               <a href={introToEtlDocs["Batch Dataset"]} download>
-                <Button 
-                  className='h-[100%] ml-2'
-                  variant='contained'
+                <Button
+                  sx={{ height: '100%', ml: 1 }}
+                  variant="contained"
                 >
                   Download dataset for this exercise
                 </Button>
               </a>
-            }
-          </div>
-          <div className='flex-grow border'>
+            )}
+          </Box>
+          <Box flexGrow={1}>
             <Guide url={selectedGuideUrl} />
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
       <Chatbot />
-    </div>
+    </Box>
   );
 };
 

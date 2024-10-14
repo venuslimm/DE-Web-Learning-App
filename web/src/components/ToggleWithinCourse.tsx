@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { NavListType } from '../types';
 
-const ToggleGuide = ({ nav, currentPageKey }: { nav: NavListType, currentPageKey: string }) => {
+const ToggleWithinCourse = ({ nav, currentPageKey }: { nav: NavListType, currentPageKey: string }) => {
   const router = useRouter();
   const [selectedNav, setSelectedNav] = React.useState(nav[currentPageKey] as string);
 
@@ -18,13 +18,13 @@ const ToggleGuide = ({ nav, currentPageKey }: { nav: NavListType, currentPageKey
   };
   
   return (
-    <FormControl sx={{ width: '100%' }}>
-      <InputLabel id="demo-simple-select-helper-label">Guide Nav</InputLabel>
+    <FormControl sx={{ width: '50vh' }}>
+      <InputLabel id="demo-simple-select-helper-label">Course Nav</InputLabel>
       <Select
         labelId="demo-simple-select-helper-label"
         id="demo-simple-select-helper"
         value={selectedNav}
-        label="Nav"
+        label="Course Nav"
         onChange={handleChange}
       >
         {Object.keys(nav).map((key) => (
@@ -35,4 +35,4 @@ const ToggleGuide = ({ nav, currentPageKey }: { nav: NavListType, currentPageKey
   )
 }
 
-export default ToggleGuide;
+export default ToggleWithinCourse;

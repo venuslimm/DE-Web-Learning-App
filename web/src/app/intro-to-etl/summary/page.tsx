@@ -1,20 +1,18 @@
 import React from 'react'
-import { Button, Link } from '@mui/material';
+import { Box, Button, Link } from '@mui/material';
 import DocPage from '@/components/page-template/DocPage';
 import { introToEtlDocs } from '@/constants';
 
 const SummaryPage = () => {
   return (
-    <div>
+    <Box>
       <DocPage url={introToEtlDocs['Summary']} />
-      <div className="flex justify-end">
-        <Button>
-          <Link href='/'>
-            Exit
-          </Link>
+      <Box display="flex" justifyContent="flex-end" mt={2}>
+        <Button component={Link} href='/' variant="contained">
+          Exit
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 

@@ -72,7 +72,7 @@ const ETLPracticalPage = () => {
               </a>
             )}
           </Box>
-          <Box flexGrow={1}>
+          <Box height={'480px'}>
             <Guide url={selectedGuideUrl} />
           </Box>
         </Box>

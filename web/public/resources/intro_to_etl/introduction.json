@@ -1,0 +1,225 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Welcome to "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Introduction to ETL"
+        },
+        {
+          "type": "text",
+          "text": " course!"
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Since you have stumbled across this course, you’re probably interested in learning how to build an ETL pipeline for your data. Before diving in, let’s first learn about the theory behind ETL."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "So, what is ETL? "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ETL"
+        },
+        {
+          "type": "text",
+          "text": ", which stands for Extract, Transform, and Load, is an approach used to build a data engineering pipeline. It involves extracting data from various data sources, processing and transforming it into a suitable format, and then loading it into the data warehouse.  "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "There are two other approaches: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ELT"
+        },
+        {
+          "type": "text",
+          "text": ", which loads the data into the destination after extraction and processes it later, and "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "reverse ETL"
+        },
+        {
+          "type": "text",
+          "text": ", where data is extracted from the data warehouse instead of from heterogeneous data sources, then transformed to a format suitable for their destinations, and fed into different applications in the company for different audiences. However, these 2 approaches will not be covered in this course."
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "These approaches have different distinct use cases:"
+        }
+      ]
+    },
+    {
+      "type": "orderedList",
+      "attrs": {
+        "start": 1
+      },
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ETL: Best for cases where data needs to be transformed before loading. Typically for legacy systems or data that requires complex transformations before it is stored."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ELT: Typically used with cloud data warehouses, where its faster to load raw data and then process afterwards for analytical needs."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Reversed ETL: Useful for operationalizing data, such as feeding processed data back into apps like CRM (customer relationship management) systems, marketing platforms, or analytics tools for decision-making."
+                }
+              ]
+            },
+            {
+              "type": "paragraph"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In this course, we will be using "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Mage.ai"
+        },
+        {
+          "type": "text",
+          "text": " to build an ETL pipeline for healthcare data. Afterwards, "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Python"
+        },
+        {
+          "type": "text",
+          "text": " will be used to perform Exploratory Data Analysis ("
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "EDA"
+        },
+        {
+          "type": "text",
+          "text": ") and create "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "data visualisations"
+        },
+        {
+          "type": "text",
+          "text": " for the processed data in the database. This will focus on identifying which infectious diseases are more prevalent in Singapore (if you're working on the batch dataset pipeline) or Malaysia (if you're working on the streaming dataset pipeline)."
+        }
+      ]
+    }
+  ]
+}

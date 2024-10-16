@@ -10,12 +10,12 @@
     "dev:web": "cd web && npm run dev",
     "dev:execution": "cd execution && npm run start",
     "dev:llm": "cd llm && npm run start"
-
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@nestjs/cli": "^10.4.4",
+    "@tiptap/extension-highlight": "^2.8.0",
     "concurrently": "^8.2.2"
   }
 }

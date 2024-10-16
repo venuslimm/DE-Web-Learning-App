@@ -6,6 +6,7 @@ import CourseNavBar from '@/components/CourseNavBar';
 import Chatbot from '@/components/Chatbot';
   import { nav } from '../../../constants';
 import { Box, Button, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import DownloadIcon from '@mui/icons-material/Download';
 import { introToEtlDocs } from '../../../constants';
 
 const ETLPracticalPage = () => {
@@ -40,8 +41,8 @@ const ETLPracticalPage = () => {
   return (
     <Box>
       <CourseNavBar navList={nav} />
-      <Box display="flex" flexDirection="row" height="550px">
-        <Box width="66.67%" height="100%">
+      <Box width="100%" display="flex" flexDirection="row" height="550px">
+        <Box flex={3} height="100%">
           <iframe
             src={`http://localhost:${process.env.MAGEAI_PORT || 6789}`}
             title="ETL"
@@ -50,12 +51,17 @@ const ETLPracticalPage = () => {
             style={{ border: 'none' }}
           />
         </Box>
-        <Box width="33.33%" ml={1} height="100%" display="flex" flexDirection="column">
-          <Box display="flex" flexDirection="row" width="100%" mb={1}>
+        <Box flex={1} ml={1} height="100%" display="flex" flexDirection="column">
+          <Box 
+            display="flex" 
+            flexDirection="row" 
+            width="100%" 
+            height="9%"
+            >
             <Select
               value={selectedGuide}
               onChange={handleGuideChange}
-              fullWidth
+              sx={{ height: '100%', flex: 5, mr: 1 }}
             >
               {guides.map((guide, index) => (
                 <MenuItem key={index} value={index}>{guide.name}</MenuItem>
@@ -64,15 +70,15 @@ const ETLPracticalPage = () => {
             {selectedGuide === 0 && (
               <a href={introToEtlDocs["Batch Dataset"]} download>
                 <Button
-                  sx={{ height: '100%', ml: 1 }}
+                  sx={{ height: '100%', flex: 1 }}
                   variant="contained"
                 >
-                  Download dataset for this exercise
+                  <DownloadIcon />
                 </Button>
               </a>
             )}
           </Box>
-          <Box flexGrow={1}>
+          <Box height={'90%'}>
             <Guide url={selectedGuideUrl} />
           </Box>
         </Box>

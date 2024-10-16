@@ -11,7 +11,7 @@ export const nav = {
 };
 
 export const introToEtlDocs: StringStringMap = {
-  'Introduction': '/resources/intro_to_etl/introduction.pdf',
+  'Introduction': '/resources/intro_to_etl/introduction.json',
   'Batch Guide': '/resources/intro_to_etl/batch_guide.pdf',
   'Stream Guide': '/resources/intro_to_etl/streaming_guide.pdf',
   // 'EDA': '/resources/intro_to_etl/eda.pdf',

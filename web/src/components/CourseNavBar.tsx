@@ -43,7 +43,7 @@ const CourseNavBar: React.FC<CourseNavBarProps> = ({
   }
   
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" pt={2}>
+    <Box display="flex" justifyContent="center" alignItems="center">
       <Box display="flex" flexDirection="row" mt={2} mb={3}>
         {!isFirstPage && <PreviousButton onClickFn={previousButtonClicked} />}
         <ToggleWithinCourse nav={navList} currentPageKey={currentPageKey} />

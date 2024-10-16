@@ -15,7 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "@nestjs/cli": "^10.4.4",
-    "@tiptap/extension-highlight": "^2.8.0",
     "concurrently": "^8.2.2"
   }
 }

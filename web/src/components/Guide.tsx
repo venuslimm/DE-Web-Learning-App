@@ -25,7 +25,7 @@ const Guide: React.FC<UrlProps> = ({ url }) => {
     };
 
     fetchContent();
-  });
+  }, [url]);
 
   return (
     <Box sx={{ width: '100%', height: '100%' }}>

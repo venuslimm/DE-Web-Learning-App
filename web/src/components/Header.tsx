@@ -18,7 +18,7 @@ const Header = () => {
       height={'7vh'}
     >
       <Link href="/#course-catalogue" className="mb-1">
-        <Image src="/resources/logo.png" alt="App Logo" width={150} height={150} className="display-10" />
+        <Image src="/resources/logo.png" alt="App Logo" width={150} height={150} />
       </Link>
       {/* <nav>
         <ul className="nav">

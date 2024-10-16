@@ -42,16 +42,21 @@ const ETLPracticalPage = () => {
     <Box>
       <CourseNavBar navList={nav} />
       <Box width="100%" display="flex" flexDirection="row" height="550px">
-        <Box flex={3} height="100%">
+        <Box width="65%" height="100%">
           <iframe
             src={`http://localhost:${process.env.MAGEAI_PORT || 6789}`}
             title="ETL"
             width="100%"
             height="550px"
-            style={{ border: 'none' }}
+            style={{ border: '1px solid black' }}
           />
         </Box>
-        <Box flex={1} ml={1} height="100%" display="flex" flexDirection="column">
+        <Box 
+          width="35%" 
+          ml={1} 
+          height="100%" 
+          display="flex" 
+          flexDirection="column">
           <Box 
             display="flex" 
             flexDirection="row" 
@@ -61,7 +66,7 @@ const ETLPracticalPage = () => {
             <Select
               value={selectedGuide}
               onChange={handleGuideChange}
-              sx={{ height: '100%', flex: 5, mr: 1 }}
+              sx={{ height: '100%', flex: 5 }}
             >
               {guides.map((guide, index) => (
                 <MenuItem key={index} value={index}>{guide.name}</MenuItem>
@@ -70,7 +75,7 @@ const ETLPracticalPage = () => {
             {selectedGuide === 0 && (
               <a href={introToEtlDocs["Batch Dataset"]} download>
                 <Button
-                  sx={{ height: '100%', flex: 1 }}
+                  sx={{ height: '100%', flex: 1, ml: 1 }}
                   variant="contained"
                 >
                   <DownloadIcon />

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -8,9 +8,9 @@ import { AddPhotoAlternate, FileDownload } from '@mui/icons-material';
 
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
 import ImageResize from 'tiptap-extension-resize-image';
 import Highlight from '@tiptap/extension-highlight';
+import Link from '@tiptap/extension-link'
 
 import Highlighter from './Highlighter';
 
@@ -26,10 +26,14 @@ const TextEditor: React.FC<TextEditorProps> = ({ content, isEditable, isExportab
 
   const editor = useEditor({
     extensions: [
-      StarterKit, 
-      Image,  // TODO: Set default size for image
+      StarterKit,
       ImageResize,
       Highlight.configure({ multicolor: true }),
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        defaultProtocol: 'https',
+      }),
     ],
     content: content,
     editable: isEditable,
@@ -41,10 +45,19 @@ const TextEditor: React.FC<TextEditorProps> = ({ content, isEditable, isExportab
     },
   });
 
+  useEffect(() => {
+    if (!editor) {
+      return;
+    }
+    if (editor) {
+      editor.commands.setContent(content);
+    }
+  }, [content, editor]);
+
   if (!editor) {
     return null;
   }
-
+  
   const downloadFile = (content: string, fileName: string, mimeType: string) => {
     const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
@@ -134,7 +147,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ content, isEditable, isExportab
           ) : <></>
         }
       </Box>
-      <Box sx={{ border: 1, padding: 1, overflow: 'auto', height: '90%' }}>
+      <Box sx={{ border: 1, overflow: 'auto', height: '90%' }}>
         <EditorContent editor={editor} />
       </Box>
     </Box>

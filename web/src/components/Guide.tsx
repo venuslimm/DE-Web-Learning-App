@@ -13,7 +13,6 @@ const Guide: React.FC<UrlProps> = ({ url }) => {
   async function getJsonContents() {
     const response = await fetch(url);
     const json = await response.json();
-    console.log(json);
     return json;
   }
 
@@ -29,7 +28,7 @@ const Guide: React.FC<UrlProps> = ({ url }) => {
   });
 
   return (
-    <Box sx={{ height: '100%' }}>
+    <Box sx={{ width: '100%', height: '100%' }}>
       {
         content 
           ? (

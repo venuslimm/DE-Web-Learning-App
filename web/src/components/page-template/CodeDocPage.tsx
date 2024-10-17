@@ -59,7 +59,6 @@ const CodeDocPage: React.FC<CodeDocPageProps> = ({ html, setHtml, code, setCode,
             value={code}
             extensions={[python()]}
             onChange={(update) => {
-              console.log(update);
               setCode(update);
             }}
           />
@@ -72,7 +71,7 @@ const CodeDocPage: React.FC<CodeDocPageProps> = ({ html, setHtml, code, setCode,
             open={outputOpen} 
             setOpen={setOutputOpen} 
           />
-          <Box height="1000px">
+          <Box height="1300px">
             <Guide url={url} />
           </Box>
           <Chatbot />

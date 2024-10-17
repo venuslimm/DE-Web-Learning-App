@@ -42,7 +42,7 @@ const ETLPracticalPage = () => {
     <Box>
       <CourseNavBar navList={nav} />
       <Box width="100%" display="flex" flexDirection="row" height="550px">
-        <Box width="65%" height="100%">
+        <Box width="72%" height="100%">
           <iframe
             src={`http://localhost:${process.env.MAGEAI_PORT || 6789}`}
             title="ETL"
@@ -52,7 +52,7 @@ const ETLPracticalPage = () => {
           />
         </Box>
         <Box 
-          width="35%" 
+          width="28%" 
           ml={1} 
           height="100%" 
           display="flex" 

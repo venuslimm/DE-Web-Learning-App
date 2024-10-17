@@ -74,20 +74,6 @@
               "content": [
                 {
                   "type": "text",
-                  "text": "EDA with Python"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
                   "text": "Building data visualisations using Python"
                 }
               ]
@@ -148,20 +134,6 @@
                 {
                   "type": "text",
                   "text": "Loading processed data into database on Mage.ai"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Performing EDA on data in database using Python"
                 }
               ]
             }

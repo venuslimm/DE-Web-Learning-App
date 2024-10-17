@@ -191,20 +191,7 @@
         },
         {
           "type": "text",
-          "text": " will be used to perform Exploratory Data Analysis ("
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            }
-          ],
-          "text": "EDA"
-        },
-        {
-          "type": "text",
-          "text": ") and create "
+          "text": " will be used to create "
         },
         {
           "type": "text",
@@ -217,7 +204,7 @@
         },
         {
           "type": "text",
-          "text": " for the processed data in the database. This will focus on identifying which infectious diseases are more prevalent in Singapore (if you're working on the batch dataset pipeline) or Malaysia (if you're working on the streaming dataset pipeline)."
+          "text": " for the processed data in the database. We will process the data for Singapore (if you're working on the batch dataset pipeline) and/or Malaysia (if you're working on the streaming dataset pipeline). Then we will identify which infectious diseases are more prevalent in Singapore."
         }
       ]
     }

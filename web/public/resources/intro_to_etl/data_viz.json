@@ -149,7 +149,7 @@
                       "type": "bold"
                     }
                   ],
-                  "text": "Lines 9-75"
+                  "text": "Lines 9-74"
                 },
                 {
                   "type": "text",
@@ -176,7 +176,7 @@
                 },
                 {
                   "type": "text",
-                  "text": ": Establishes the connection to the database where our data was loaded to in the previous section of this course"
+                  "text": ": Establishes the connection to the database where our data was loaded to in the previous section of this course (ETL)"
                 }
               ]
             },
@@ -262,7 +262,7 @@
         },
         {
           "type": "text",
-          "text": " table:"
+          "text": " table created in the previous section (ETL):"
         }
       ]
     },
@@ -369,7 +369,25 @@
       "content": [
         {
           "type": "text",
-          "text": "Note: Do not copy the code from the document to the code editor."
+          "text": "⚠️ Do not copy the code from the document to the code editor."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "⚠️ You may use DEBot for technical queries."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "⚠️ The 5 TODOs below can be found as comments in the code editor on the left of this page."
         }
       ]
     },
@@ -401,7 +419,7 @@
       "content": [
         {
           "type": "text",
-          "text": "At line 55, we will have all our data stored in "
+          "text": "When this code is executed later on, at line 55, we will have all our data stored in "
         },
         {
           "type": "text",
@@ -414,7 +432,7 @@
         },
         {
           "type": "text",
-          "text": ". However, this data might not only be for ‘Singapore’ but also for other countries (depending on what country’s data was fed into the pipeline previously). "
+          "text": ". However, this data might not only consists of ‘Singapore’ data but also other countries' data (depending on what country’s data was fed into the pipeline previously). "
         }
       ]
     },
@@ -431,18 +449,13 @@
       ]
     },
     {
-      "type": "paragraph",
+      "type": "codeBlock",
+      "attrs": {
+        "language": null
+      },
       "content": [
         {
           "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            },
-            {
-              "type": "italic"
-            }
-          ],
           "text": "df_sg = df.query('country==\"singapore\"')"
         }
       ]
@@ -575,18 +588,13 @@
       "type": "paragraph"
     },
     {
-      "type": "paragraph",
+      "type": "codeBlock",
+      "attrs": {
+        "language": null
+      },
       "content": [
         {
           "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            },
-            {
-              "type": "italic"
-            }
-          ],
           "text": "df_grouped = df_sg.groupby('disease', as_index=False)['no_of_cases'].sum()"
         }
       ]
@@ -627,7 +635,7 @@
         },
         {
           "type": "text",
-          "text": " and keeping this column as a regular column instead of index."
+          "text": " and keep this column as a regular column instead of index."
         }
       ]
     },
@@ -667,18 +675,13 @@
       "type": "paragraph"
     },
     {
-      "type": "paragraph",
+      "type": "codeBlock",
+      "attrs": {
+        "language": null
+      },
       "content": [
         {
           "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            },
-            {
-              "type": "italic"
-            }
-          ],
           "text": "df_sorted = df_grouped.sort_values(by='no_of_cases', ascending=False)"
         }
       ]
@@ -759,18 +762,13 @@
       "type": "paragraph"
     },
     {
-      "type": "paragraph",
+      "type": "codeBlock",
+      "attrs": {
+        "language": null
+      },
       "content": [
         {
           "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            },
-            {
-              "type": "italic"
-            }
-          ],
           "text": "df_top10 = df_sorted.head(10)"
         }
       ]
@@ -798,7 +796,7 @@
         },
         {
           "type": "text",
-          "text": " returns the first 10 rows for "
+          "text": " returns the first 10 rows of "
         },
         {
           "type": "text",
@@ -864,52 +862,14 @@
       "type": "paragraph"
     },
     {
-      "type": "paragraph",
+      "type": "codeBlock",
+      "attrs": {
+        "language": null
+      },
       "content": [
         {
           "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            },
-            {
-              "type": "italic"
-            }
-          ],
-          "text": "bar_fig = "
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "link",
-              "attrs": {
-                "href": "http://px.bar",
-                "target": "_blank",
-                "rel": "noopener noreferrer nofollow",
-                "class": null
-              }
-            },
-            {
-              "type": "bold"
-            },
-            {
-              "type": "italic"
-            }
-          ],
-          "text": "px.bar"
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            },
-            {
-              "type": "italic"
-            }
-          ],
-          "text": "(df_top10, x=\"disease\", y=\"no_of_cases\", title=\"Top 10 Diseases in Singapore\")"
+          "text": "bar_fig = px.bar(df_top10, x=\"disease\", y=\"no_of_cases\", title=\"Top 10 Diseases in Singapore\")"
         }
       ]
     },
@@ -1006,7 +966,7 @@
         },
         {
           "type": "text",
-          "text": " right above the code editor and after a few seconds, you should see the output (bar graph) at the bottom right of this page."
+          "text": " right above the code editor and after a few seconds, you should see the output (bar graph) above this guide."
         }
       ]
     },
